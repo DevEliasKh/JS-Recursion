@@ -1,7 +1,3 @@
-let leftArr = [1, 3, 5, 7, 9, 11, 13];
-let rightArr = [2, 4, 6, 8, 10];
-let mergedArr = [];
-
 function merge(firstArr, secondArr) {
 	let finalArr = [];
 	while (firstArr.length > 0 && secondArr.length > 0) {
@@ -9,8 +5,20 @@ function merge(firstArr, secondArr) {
 		finalArr.push(minIndexArray[0]);
 		minIndexArray.shift();
 	}
-	mergedArr = finalArr.concat(firstArr, secondArr);
+	return finalArr.concat(firstArr, secondArr);
 }
 
-merge(leftArr, rightArr);
-console.log(mergedArr);
+function mergeSort(unsortedArray) {
+	if (unsortedArray.length < 2) {
+		return unsortedArray;
+	}
+	const mid = Math.floor(unsortedArray.length / 2);
+	const leftArray = mergeSort(unsortedArray.slice(0, mid));
+	const rightArray = mergeSort(unsortedArray.slice(mid));
+	console.log(leftArray, rightArray);
+	return merge(leftArray, rightArray);
+}
+
+const unsortedArray = [5, 0, 10, -3, -1, 4, 12, -5];
+
+console.log(mergeSort(unsortedArray));
